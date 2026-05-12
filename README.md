@@ -1,0 +1,2 @@
+# charchameng
+Marka kodlarini tekshirish

@@ -44,26 +44,21 @@ jobs:
           SDK_DIR="$HOME/.buildozer/android/platform/android-sdk"
           mkdir -p "$SDK_DIR/cmdline-tools"
 
-          # Download Android command-line tools
           cd /tmp
           wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O cmdline-tools.zip
           unzip -q cmdline-tools.zip
           mv cmdline-tools "$SDK_DIR/cmdline-tools/latest"
           rm cmdline-tools.zip
 
-          # Symlink tools/ for buildozer 1.5.0 compatibility (it looks at old path)
           ln -sf "$SDK_DIR/cmdline-tools/latest" "$SDK_DIR/tools"
 
-          # Accept ALL licenses (pipe yes to every prompt)
           yes 2>/dev/null | "$SDK_DIR/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null 2>&1 || true
 
-          # Pre-install required SDK components
           "$SDK_DIR/cmdline-tools/latest/bin/sdkmanager" \
             "platform-tools" \
             "platforms;android-33" \
             "build-tools;33.0.2" > /dev/null
 
-          # Set ANDROID_HOME for buildozer
           echo "ANDROID_HOME=$SDK_DIR" >> $GITHUB_ENV
           echo "ANDROIDSDK=$SDK_DIR" >> $GITHUB_ENV
 

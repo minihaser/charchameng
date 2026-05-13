@@ -8,7 +8,9 @@ source.include_exts = py,png,jpg,kv,atlas,txt
 
 version = 1.0
 
-requirements = python3,kivy==2.3.0,kivymd==1.2.0,pillow
+# Python 3.11 explicitly (default p4a uses 3.14 which breaks kivy 2.3.0)
+# kivy 2.3.1 has fixes for newer python; pin everything
+requirements = python3==3.11.9,hostpython3==3.11.9,kivy==2.3.1,kivymd==1.2.0,pillow
 
 orientation = portrait
 fullscreen = 0
@@ -24,16 +26,14 @@ android.ndk = 25b
 android.archs = arm64-v8a, armeabi-v7a
 android.allow_backup = True
 
-# Ruxsatlar — tashqi xotira (bor.txt / yoq.txt yozish uchun)
+# Ruxsatlar
 android.permissions = READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE
 
-# Android 11+ uchun (faylga to'liq kirish)
+# Android 11+ uchun
 android.request_legacy_storage = True
 
-# Ekran o'chirilmasin (uzoq skanlash sessiyalari uchun ixtiyoriy)
 android.wakelock = False
 
-# Log level (debug uchun 2, release uchun 1)
 log_level = 2
 
 [buildozer]
